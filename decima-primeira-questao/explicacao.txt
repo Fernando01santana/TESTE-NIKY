@@ -1,0 +1,22 @@
+Devido a problemas de login na conta utilizada nao foi possivel realizar a
+questao de numero onze, no entando demonstrarei em passos como resolveria.
+
+1 - criar um usuario IAM para a realizacao desta atividade
+2 - adicionar a permissao AWSLambdaSQSQueueExecuionRole para que ele pudesse
+ler,reeber, enviar e ter acesso a outros recursos lambda e sqs 
+3 - criar uma fila, no menu da AWS selecionar Simple Queue Service
+4 - clicar em criar fila
+5 - informar o tipo que necessario se é padrao ou FIFO escolheiria FIFO pelo processamento
+e ordem de chegada das mensagens
+6 - configurar tempo limite de visibilidade e periodo de retencao de mensagem
+7 - se necessario utilizar alguma criptografia no menu inferior
+8 - nomear a fila e clicar em criar
+
+9 - no menu de servicos disponiveis pela AWS selecionar lambda
+10 - criar funcao lambda 
+11 - nesta tela tera uma serie de cases, optaria por criar o zero
+12 - nomear funcao
+13 - criar funcao
+
+14 - definir como trigger a fila SQS criada
+15 - em monitor, clicar em visualizar logs no cloudwatch, visando ja ter um grupo criado na mesma regiao e conta dos passos anteriores
