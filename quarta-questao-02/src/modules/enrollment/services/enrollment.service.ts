@@ -35,4 +35,13 @@ constructor(
         const enrollment = await this.enrollmentReopsitorie.find()
         return enrollment
     }
+
+    async remove(enrollmentId):Promise<void>{
+        const enrolmment = await this.enrollmentReopsitorie.findBy({id:enrollmentId})
+        if (!enrolmment.length) {
+            throw new AppError("Matricula nao encontrada",401);
+        }
+        await this.enrollmentReopsitorie.remove(enrolmment)
+        return
+    }
 }

@@ -1,0 +1,11 @@
+classe classroom:
+
+responsavel por realizar toda manipulacao referente as 
+informacoes sobre as matriculas dos estudantes.
+
+metodos:
+
+create - criar uma matricula
+findAll - recuperar todas as matriculas cadastradas na base 
+de dados
+remove - remover a matricula da base de dados

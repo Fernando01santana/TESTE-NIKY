@@ -1,0 +1,14 @@
+classe classroom:
+
+responsavel por realizar toda manipulacao referente as 
+informacoes sobre a classe.
+
+metodos:
+
+create - criar uma classe
+findAll - recuperar todas as classes cadastradas na base 
+de dados
+findByInstructor - procurar classe atraves de seu instrutor
+remove - remover classe da base de dados
+vinculeForClass - vincular instrutor e classe
+update - atualizar classe

@@ -1,0 +1,13 @@
+class student:
+
+responsavel por realizar toda manipulacao referente as 
+informacoes sobre os tipos de atividades das classes.
+
+metodos:
+
+create - cria um tipo de atividade na base de dados
+findAll - recuperar todos os tipos de atividades cadastrados na base 
+de dados
+findOne - busca por apenas um tipo de atividade
+update - atualiza as informacoes de um tipo de atividade
+remove - remover um tipo de atividade da base de dados

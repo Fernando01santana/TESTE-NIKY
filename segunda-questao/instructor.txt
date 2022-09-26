@@ -1,0 +1,14 @@
+class instructor:
+
+responsavel por realizar toda manipulacao referente as 
+informacoes sobre os instrutores das classes.
+
+metodos:
+
+create - cria um instrutor na base de dados
+findAll - recuperar todos os instrutores cadastrados na base 
+de dados
+findOne - busca por apenas um instrutor
+update - atualiza as informacoes de um instrutor
+remove - remover um instrutor da base de dados
+vinculeInstructorToClass - vincula instrutor com uma classe

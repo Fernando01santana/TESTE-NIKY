@@ -42,11 +42,11 @@ export default class InstructorService{
 
         }
 
-        async findAll():Promise<Instructor[]>{
+    async findAll():Promise<Instructor[]>{
             return this.instructorRepositorie.find()
         }
 
-        async findOne(id:string):Promise<Instructor>{
+    async findOne(id:string):Promise<Instructor>{
             const students = await this.instructorRepositorie.findBy({id:id})
             if (!students) {
                 throw new AppError("Instrutor especificado nao encontrado",401);
@@ -54,7 +54,7 @@ export default class InstructorService{
             return students[0]
         }
 
-        async update(updatedInstructor:UpdatedInstructorDto):Promise<Instructor>{
+    async update(updatedInstructor:UpdatedInstructorDto):Promise<Instructor>{
             const searchInstructor = await this.instructorRepositorie.findBy({id:updatedInstructor.id})
             if (!searchInstructor[0]?.id) {
                 throw new AppError('Nenhum instrutor encontrado',401)
@@ -76,13 +76,13 @@ export default class InstructorService{
 
         }
 
-        async remove(id:string):Promise<void>{
+    async remove(id:string):Promise<void>{
             const instructor = await this.instructorRepositorie.findBy({id:id})
             await this.instructorRepositorie.remove(instructor)
             return
         }
 
-        async vinculeInstructorToClass(idInstructor:String,idClass:String):Promise<Instructor>{
+    async vinculeInstructorToClass(idInstructor:String,idClass:String):Promise<Instructor>{
             const classe = await this.classesRepositorie.findBy({id:String(idClass)})
             if (!classe.length) {
                 throw new AppError("Classe informada nao encontrada",401);

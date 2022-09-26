@@ -1,0 +1,17 @@
+class student:
+
+responsavel por realizar toda manipulacao referente as 
+informacoes sobre os estudantes das classes.
+
+metodos:
+
+create - cria um estudante na base de dados
+findAll - recuperar todos os estudantes cadastrados na base 
+de dados
+findOne - busca por apenas um estudante
+update - atualiza as informacoes de um estudante
+remove - remover um estudante da base de dados
+findByTypeStudent - busca um estudante pelo tipo atribuido a ele
+findStudantsByClass - procur um estudante pela sua classe
+vinculeStudent - vincula estudante a sua classe
+createTypeStudent - cria um tipo de estudante
