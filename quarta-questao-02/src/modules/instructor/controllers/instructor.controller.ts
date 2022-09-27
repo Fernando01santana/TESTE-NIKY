@@ -34,7 +34,8 @@ export class InstructorController{
 
     @Get('vincule/class')
     async vinculeClass(@Query() idInstructor:String,idclass:String):Promise<any>{
-        return this.instructorService.vinculeInstructorToClass(idInstructor,idclass)
+        const data = await  this.instructorService.vinculeInstructorToClass(idInstructor,idclass)
+        return data
     }
 
     @Delete('remove')

@@ -87,24 +87,32 @@ export default class InstructorService{
             return
         }
 
-    async vinculeInstructorToClass(idInstructor:any,idClass:any):Promise<Instructor>{        
-            const classe = await this.classesRepositorie.findBy({id:idInstructor.idClass})
-            if (!classe) {
-                throw new AppError("Classe informada nao encontrada",401);
-            }
+    async vinculeInstructorToClass(idInstructor:any,idClass:any):Promise<Instructor>{  
 
-            const instructor = await this.instructorRepositorie.findBy({id:idInstructor.idInstructor})
-            
-            if (!instructor.length) {
-                throw new AppError("Instrutor informada nao encontrada",401);
-            }
-            
-            classe[0].instructor = instructor[0]
-            instructor[0].classes.push(classe[0])
-            try {
+                const classe = await this.classesRepositorie.findBy({id:idInstructor.idClass})            
+                if (classe.length === 0) {
+                    throw new AppError("Classe informada nao encontrada",401);
+                }
+
+                const instructor = await this.instructorRepositorie.findBy({id:idInstructor.idInstructor})
+                
+                if (instructor.length == 0) {
+                    throw new AppError("Instrutor informada nao encontrada",401);
+                }
+                
+                classe[0].instructor = instructor[0]
+
+                if (!instructor[0].classes) {
+                    instructor[0].classes = []
+                    instructor[0].classes.push(classe[0])
+                }else{
+                    instructor[0].classes.push(classe[0])
+                }
+                classe[0].instructor = instructor[0]
+                try {
+
                 const instructorVinculed = await this.instructorRepositorie.save(instructor[0])
-                await this.classesRepositorie.save(instructor[0])
-
+                const classUpdated = await this.classesRepositorie.save(classe[0])
                 return instructorVinculed
             } catch (error) {
                 console.log(error.message);
