@@ -95,15 +95,23 @@ constructor(
         return students[0]
     }
 
-    async findByTypeStudent(typeStudent:string):Promise<Students>{
-        const searchTypeStudent = await this.typeStudantRepositorie.findBy({name:typeStudent})
-        if (!searchTypeStudent) {
+    async findByTypeStudent(typeStudent:any):Promise<Students>{
+        const typeStudentSearch = await this.typeStudantRepositorie.findBy({name:String(typeStudent.typeStudent)})
+        if (typeStudentSearch.length === 0) {
             throw new AppError("Tipo de aluno informado nao encontrado");
         }
-        const student = await this.studentRepositorie.findBy({type_student:searchTypeStudent})
-        if (!student) {
+
+        const searchTypeStudent = await this.typeStudantRepositorie.findBy({})
+        if (!searchTypeStudent) {
+            throw new AppError("Aluno com o tipo informado náo encontrado");
+        }
+        
+        const student = await this.studentRepositorie.findBy({type_student:searchTypeStudent[0]})
+        if (student.length === 0) {
             throw new AppError("Nenhum aluno encontrado com o tipo informado",401);
         }
+
+        
         return student[0]
     }
 
