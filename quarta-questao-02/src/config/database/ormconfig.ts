@@ -11,11 +11,11 @@ import Enrollment from "src/modules/enrollment/typeorm/entities/enrollment.entit
 
  const ormConfig = new DataSource({
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
+    host: process.env.HOST,
+    port: parseInt(process.env.PORT),
+    username: process.env.USERNAME,
     password: "",
-    database: 'niky10',
+    database: process.env.DATABASE,
     entities: [Address, Students,TypeStudant,Contact,Instructor,Classes,TypeTask,Enrollment],
     migrations: ["dist/shared/typeorm/migrations/*.js"],
     // cli:{migrationsDir:"dist/shared/typeorm/migrations/*.js"},
