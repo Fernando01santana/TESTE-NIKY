@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import Classes from "src/modules/classroom/typeorm/entities/classes.entities";
 import Contact from "src/modules/instructor/typeorm/entities/contact.entity";
@@ -23,6 +23,11 @@ export default class InstructorService{
     ){}
 
     async create(createInstructor:CreateInstructorDto):Promise<Instructor>{
+        const searchInstructor = await this.instructorRepositorie.findBy({document:createInstructor.document})
+        
+        if (searchInstructor) {
+            throw new AppError("Instrutor ja cadastrado na base de dados",400);
+        }
         const address = await this.addressRepositorie.save(createInstructor.address)
         const createContact = await this.contactRepositorie.save({phone:createInstructor.contact})
 
@@ -46,8 +51,8 @@ export default class InstructorService{
             return this.instructorRepositorie.find()
         }
 
-    async findOne(id:string):Promise<Instructor>{
-            const students = await this.instructorRepositorie.findBy({id:id})
+    async findOne(id:any):Promise<Instructor>{
+            const students = await this.instructorRepositorie.findBy({id:id.id})
             if (!students) {
                 throw new AppError("Instrutor especificado nao encontrado",401);
             }
@@ -76,22 +81,24 @@ export default class InstructorService{
 
         }
 
-    async remove(id:string):Promise<void>{
-            const instructor = await this.instructorRepositorie.findBy({id:id})
+    async remove(id:any):Promise<void>{     
+            const instructor = await this.instructorRepositorie.findBy({id:String(id.id)})
             await this.instructorRepositorie.remove(instructor)
             return
         }
 
-    async vinculeInstructorToClass(idInstructor:String,idClass:String):Promise<Instructor>{
-            const classe = await this.classesRepositorie.findBy({id:String(idClass)})
-            if (!classe.length) {
+    async vinculeInstructorToClass(idInstructor:any,idClass:any):Promise<Instructor>{        
+            const classe = await this.classesRepositorie.findBy({id:idInstructor.idClass})
+            if (!classe) {
                 throw new AppError("Classe informada nao encontrada",401);
             }
 
-            const instructor = await this.instructorRepositorie.findBy({id:String(idInstructor)})
+            const instructor = await this.instructorRepositorie.findBy({id:idInstructor.idInstructor})
+            
             if (!instructor.length) {
                 throw new AppError("Instrutor informada nao encontrada",401);
             }
+            
             classe[0].instructor = instructor[0]
             instructor[0].classes.push(classe[0])
             try {
@@ -100,6 +107,7 @@ export default class InstructorService{
 
                 return instructorVinculed
             } catch (error) {
+                console.log(error.message);
                 throw new AppError("Erro ao salvar instructor: "+error,400);
                 
             }

@@ -38,7 +38,7 @@ export class InstructorController{
     }
 
     @Delete('remove')
-    async remove(@Query() id:string):Promise<void>{
+    async remove(@Query() id:String):Promise<void>{
         const result = await this.instructorService.remove(id)
         return result
     }

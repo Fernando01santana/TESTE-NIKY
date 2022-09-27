@@ -20,11 +20,11 @@ export default class Instructor{
     @Column()
     title: string;
 
-    @OneToOne(() => Address, address => address.id)
+    @OneToOne(() => Address, address => address.id,{eager:true,onDelete:'CASCADE'})
     @JoinColumn({name:'address'})
     address: Address
 
-    @OneToOne(() => Contact, contact => contact.id)
+    @OneToOne(() => Contact, contact => contact.id,{eager:true,onDelete:'CASCADE'})
     @JoinColumn({name:'contact'})
     contact: Contact
 

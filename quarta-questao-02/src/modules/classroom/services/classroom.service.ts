@@ -26,11 +26,11 @@ export default class ClassroomService{
         const instructor = await this.instructorRepositorie.findBy({id:createClass.instructor})
         const searchTypeTask = await this.typetaskRepositorie.findBy({name:createClass.typeTask})
         
-        if (!instructor.length) {
+        if (!instructor) {
             throw new AppError("Instrutor nao encontrado",401);
         }
 
-        if (!searchTypeTask.length) {
+        if (!searchTypeTask) {
             throw new AppError("Tipo de atividade nao encontrado",401);
         }
 
