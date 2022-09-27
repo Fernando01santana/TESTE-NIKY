@@ -87,8 +87,8 @@ constructor(
         return this.studentRepositorie.find()
     }
 
-    async findOne(id:string):Promise<Students>{
-        const students = await this.studentRepositorie.findBy({id:id})
+    async findOne(id:any):Promise<Students>{
+        const students = await this.studentRepositorie.findBy({id:String(id.id)})
         if (!students) {
             throw new AppError("Estudante especificado nao encontrado",401);
         }

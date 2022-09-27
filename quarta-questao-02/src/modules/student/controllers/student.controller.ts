@@ -23,10 +23,9 @@ export class StudentController{
         return result
     }
 
-    @Post('find')
+    @Get('find')
     async findAll():Promise<any>{
         const result = await this.studentService.findAll()
-        console.log(result);
         return result
     }
 
