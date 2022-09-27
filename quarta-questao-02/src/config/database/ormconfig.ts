@@ -8,14 +8,17 @@ import Students from "src/modules/student/typeorm/entities/students.entity";
 import TypeStudant from "src/modules/student/typeorm/entities/typeStudant";
 import { DataSource } from "typeorm";
 import Enrollment from "src/modules/enrollment/typeorm/entities/enrollment.entitie";
+import {config} from 'dotenv'
+
+config()
 
  const ormConfig = new DataSource({
     type: 'postgres',
     host: process.env.HOST,
     port: parseInt(process.env.PORT),
     username: process.env.USERNAME,
-    password: "",
-    database: process.env.DATABASE,
+    password: String(process.env.PASSWORD),
+    database: String(process.env.DATABASE),
     entities: [Address, Students,TypeStudant,Contact,Instructor,Classes,TypeTask,Enrollment],
     migrations: ["dist/shared/typeorm/migrations/*.js"],
     // cli:{migrationsDir:"dist/shared/typeorm/migrations/*.js"},

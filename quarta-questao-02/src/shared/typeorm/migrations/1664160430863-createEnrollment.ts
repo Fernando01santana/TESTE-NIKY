@@ -24,7 +24,6 @@ export class migrations1664160430863 implements MigrationInterface {
                         type: 'int',
                         isGenerated:true,
                         generationStrategy:'increment',
-                        default:'increment'
                     },
                     {
                         name: 'created_at',

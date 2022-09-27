@@ -2,7 +2,7 @@
 
 import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm"
 
-export class student1663986494638 implements MigrationInterface {
+export class migration1663986494638 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
